@@ -11,8 +11,8 @@ from urllib.error import URLError
 
 DOJI_API = "https://giavang.doji.vn/api/giavang/?api_key=258fbd2a19eab10e3bbd33a7&jsoncallback=jQuery"
 
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "chat_id_group_vip")
+TELEGRAM_BOT_TOKEN = os.environ.get("ap_key_telegram_dvtbot", "")
+TELEGRAM_CHAT_ID = os.environ.get("chat_id_group_vip", "")
 
 
 def fetch_doji_prices():
@@ -102,8 +102,9 @@ def main():
     if not bot_token:
         print("ERROR: Set TELEGRAM_BOT_TOKEN environment variable")
         sys.exit(1)
-    if not chat_id or chat_id == "chat_id_group_vip":
-        print("WARNING: TELEGRAM_CHAT_ID chưa được set, dùng mặc định 'chat_id_group_vip'")
+    if not chat_id:
+        print("ERROR: Chưa set biến môi trường chat_id_group_vip")
+        sys.exit(1)
 
     print("Đang lấy giá vàng từ DOJI...")
     try:
